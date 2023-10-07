@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/07 10:33:05 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/07 16:24:31 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,19 @@ void	*ft_memset(void *b, int c, size_t len)
 		i++;
 	}
 	return (b);
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	while (i < n)
+	{
+		((char *)dst)[i] = ((char *)src)[i];
+		i++;
+	}
+	return (dst);
 }
