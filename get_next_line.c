@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/07 14:33:38 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/07 16:06:49 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 char	*get_next_line(int fd)
 {
 	int return_read;
-	static char *stash;
+	// static char *stash;
 	char	*original_buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (stash)
+		free(stash);
 	// Init du malloc du buffer lors de la compilation
 	original_buffer = (char*)ft_calloc(BUFFER_SIZE, 1);
 	if (!original_buffer)
@@ -28,18 +30,38 @@ char	*get_next_line(int fd)
 	return_read = read(fd, original_buffer, BUFFER_SIZE);
 	if (return_read < 0)
 		return (NULL);
-	else
-	{
-		reading_fd(fd, return_read, original_buffer)
-	}
-	return (stash);
+	// reading_fd(fd, return_read, original_buffer, stash);
+	return (reading_fd(fd, return_read, original_buffer));
+	// return (stash);
 }
 
-void	reading_fd(int fd, int return_read, char *original_buffer)
+char	*reading_fd(int fd, int return_read, char *original_buffer)
 {
-	char buff_size1[1];
-	if (return_read == 0)
+	static char *stash;
+	
+	// presence de \n
+	if (check_endofline(original_buffer) == 1)
+		return (ft_strjoin(stash, original_buffer));
+	else
 	{
-		return (ft_strjoin(original_buffer, buff_size1));
+		while (check_endofile(original_buffer) == 0 && return_read > 0)
+		{
+			stash = ft_strjoin(stash, original_buffer); // deload dans la stash
+			free(original_buffer);
+			return_read = read(fd, original_buffer, BUFFER_SIZE);
+		}
 	}
+	return (stash);
+
+}
+
+int check_endofile(char *original_buffer)
+{
+	while (original_buffer)
+	{
+		if (*original_buffer == '\n')
+			return (1);
+		*original_buffer++;
+	}
+	return (0);
 }
