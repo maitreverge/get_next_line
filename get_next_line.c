@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/07 10:39:05 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/07 14:28:17 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,30 @@
 char	*get_next_line(int fd)
 {
 	int return_read;
+	static char *stash;
 	char	*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	// Init du malloc du buffer lors de la compilation
-	buffer = (char*)malloc(BUFFER_SIZE);
+	buffer = (char*)ft_calloc(BUFFER_SIZE, 1);
 	if (!buffer)
 		return (NULL);
-	// Premiere lecture
-	return_read = reading_fd(buffer, fd);
-	if (return_read == -1)
+	// faire boucler read
+	return_read = read(fd, buffer, BUFFER_SIZE);
+	if (return_read < 0)
 		return (NULL);
-	
-	
-	
-	
-	
+	else
+	{
+		reading_fd(fd, return_read, buffer)
+	}
+	return (stash);
 }
 
-int reading_fd(char *buffer, int fd)
+void	reading_fd(int fd, int return_read, char *buffer)
 {
-	int i;
-	i = read(fd, &buffer, BUFFER_SIZE);
-	return (i);
+	if (return_read == 0)
+	{
+		
+	}
 }
-
-/*
-	! Etape 0 : creer un void *buffer dans lequel on va pouvoir turbo stocker 
-	! Etape 1 : avoir acces au fd pour pouvoir faire tourner la fonction read 
-
-	? Comment faire passer l'argument -D BUFFER_SIZE=42 directement dans le prog ?
-	? Print ce flag de compilation dans un define du fichier header / Coller ce flag cash dans
-	? une variable static du prog
-
-	! Etape 2 : Choix de l'algo
-	* CHOIX 1 ==> Liste chainees
-	pour + de perfs. Importer les fonctions de la libft pour ajouter / 
-	rejouer les nodes pour recommencer a imprimer sur stdout le bon truc
-
-*/
