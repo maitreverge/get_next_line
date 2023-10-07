@@ -6,47 +6,39 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/04 14:54:09 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/07 10:39:05 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	check_endline(char *str)
-{
-	while (str)
-	{
-		if (*str == '\n')
-			return (1);
-		*str++;
-	}
-	return (0);
-}
-
 char	*get_next_line(int fd)
 {
-	int		return_read;
-	char	*temp_buffer;
+	int return_read;
+	char	*buffer;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	temp_buffer = malloc(sizeof(char) * BUFFER_SIZE);
-	if (!temp_buffer)
+	// Init du malloc du buffer lors de la compilation
+	buffer = (char*)malloc(BUFFER_SIZE);
+	if (!buffer)
 		return (NULL);
-	while (1)
-	{
-		return_read = read(fd, temp_buffer, BUFFER_SIZE);
-		if (return_read <= 0)
-		{
-			return (NULL);
-			break;
-		}
-		if (check_endline(temp_buffer) == 1)
-		{
-			// ! Faire qqch du buffer
-		}
-		free(temp_buffer);
-	}
+	// Premiere lecture
+	return_read = reading_fd(buffer, fd);
+	if (return_read == -1)
+		return (NULL);
+	
+	
+	
+	
+	
+}
+
+int reading_fd(char *buffer, int fd)
+{
+	int i;
+	i = read(fd, &buffer, BUFFER_SIZE);
+	return (i);
 }
 
 /*
@@ -61,10 +53,5 @@ char	*get_next_line(int fd)
 	* CHOIX 1 ==> Liste chainees
 	pour + de perfs. Importer les fonctions de la libft pour ajouter / 
 	rejouer les nodes pour recommencer a imprimer sur stdout le bon truc
-
-	* CHOIX 2 ==> Buffer de gitan, stash
-	! Savoir si la stash et le buffer soivent pas etre identiques pour plus de coherence
-	! Est-ce authorise ??
-	! Est-ce que le realloc a chaque fois va pas taper la stack avec des enormes fichiers
 
 */

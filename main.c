@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:22:36 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/04 14:37:22 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/07 09:51:55 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,13 @@ int main(void)
 
 	? Coller une condition d'arret dans le main
 	? Faire boucler gnl, ou bien la faire boucler sur elle-meme ?
+
+
+
+	How C open() works in OS
+Find the existing file on the disk.
+Create file table entry.
+Set the first unused file descriptor to point to the file table entry.
+Return file descriptor used, -1 upon failure.
 
 */

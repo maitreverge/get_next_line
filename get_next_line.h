@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:13 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/04 14:26:49 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/07 10:34:57 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,18 @@
 # include <unistd.h> // read
 # include <stdlib.h> // malloc + free
 
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*next;
-}	t_list;
-
+// Function of gnl
 char	*get_next_line(int fd);
+
+// Functions of utils
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_calloc(size_t count, size_t size);
+void	ft_bzero(void *s, size_t n);
+void	*ft_memset(void *b, int c, size_t len);
+
+
+
 
 
 
