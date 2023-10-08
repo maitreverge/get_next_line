@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nope <nope@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/07 22:22:20 by nope             ###   ########.fr       */
+/*   Updated: 2023/10/08 10:10:51 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,33 +45,19 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 void	*ft_calloc(size_t count, size_t size)
 {
+	size_t	i;
 	void	*buffer;
 
 	buffer = malloc(size * count);
 	if (!buffer)
 		return (NULL);
-	ft_bzero(buffer, size * count);
-	return (buffer);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, 0, n);
-}
-
-ft_strchr
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	size_t	i;
-
 	i = 0;
-	while (i < len)
+	while (i < n)
 	{
-		((char *)b)[i] = c;
+		((char *)buffer)[i] = 0;
 		i++;
 	}
-	return (b);
+	return (buffer);
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
@@ -88,3 +74,28 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
+
+char	*ft_strchr(const char *s, int c)
+{
+	char			*p_s;
+	unsigned char	uc_c;
+
+	p_s = ((char *)s);
+	uc_c = ((unsigned char)c);
+	while (*p_s != '\0')
+	{
+		if (*p_s == uc_c)
+			return (p_s);
+		p_s++;
+	}
+	if (uc_c == '\0')
+		return (p_s);
+	else
+		return (NULL);
+}
+/*
+strchr va rechercher dans un buffer s la presence du char c
+(qui est en realite un int pour des soucis de
+compatibilite)
+
+*/
