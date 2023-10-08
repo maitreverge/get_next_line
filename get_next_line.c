@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nope <nope@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/08 15:28:36 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/08 22:22:04 by nope             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,12 @@ char	*get_next_line(int fd, char *current_line)
 	
 	return (current_line);
 }
+
+/*
+prends un gros bloc sa mere
+
+decouper le gros bloc en deux parties
+1 - Un buffer de la taille de la merde a retenir => line
+2 - le reste dans un static buffer et ouais mon gars
+
+*/
