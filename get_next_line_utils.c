@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/08 10:10:51 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/08 11:33:13 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 void	*ft_calloc(size_t count, size_t size)
 {
 	size_t	i;
-	void	*buffer;
+	char	*buffer;
 
 	buffer = malloc(size * count);
 	if (!buffer)
 		return (NULL);
 	i = 0;
-	while (i < n)
+	while (i < size)
 	{
-		((char *)buffer)[i] = 0;
+		buffer[i] = 0;
 		i++;
 	}
 	return (buffer);
@@ -97,5 +97,8 @@ char	*ft_strchr(const char *s, int c)
 strchr va rechercher dans un buffer s la presence du char c
 (qui est en realite un int pour des soucis de
 compatibilite)
+
+If the character c is found in the string s, the function returns a pointer to the first occurrence of c in s.
+If the character c is not found in the string s, the function returns NULL.
 
 */
