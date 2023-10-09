@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:13 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/08 10:15:20 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/09 10:53:21 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 
 // Function of gnl
 char	*get_next_line(int fd);
-char	*reading_fd(int fd, int return_read, char *original_buffer);
-int		check_endofile(char *original_buffer);
 
 
 // Functions of utils
@@ -29,9 +27,5 @@ char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strchr(const char *s, int c);
-
-
-
-
 
 #endif
