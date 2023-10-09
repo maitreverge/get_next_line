@@ -21,8 +21,8 @@ char	*ft_strchr(const char *s, int c)
 
 int main(void)
 {
-	const char *str = "Hello, World!";
-	int ch = 'o';
+	const char *str = "Test test \n";
+	int ch = '\n';
 	char *result = ft_strchr(str, ch);
 	printf("The character '%c' is found at position %ld\n", ch, result - str);
 }

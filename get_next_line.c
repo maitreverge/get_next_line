@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/09 12:08:38 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/09 12:19:50 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ char 	*big_chunk(int fd)
 
 char *extract_line(char *stash)
 {
+	char *temp;
+	char *return_line;
+	int size;
+
+	// len_stash = ft_strlen(stash);
+	return_line = ft_strchr(stash, '\n');
+	size = return_line - ft_strlen(stash);
+	temp = (char*)ft_calloc(size, sizeof(char) + 1);
+	while (*stash != '\n')
+	{
+		
+	}
 	
 }
 
