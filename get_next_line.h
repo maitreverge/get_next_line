@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:13 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/09 10:53:21 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/09 14:14:44 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 
 // Function of gnl
 char	*get_next_line(int fd);
+char 	*big_chunk(int fd, char *stash);
+char *extract_before_n(char *stash);
+char *extract_after_n(char *stash);
+
 
 
 // Functions of utils

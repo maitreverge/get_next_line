@@ -6,53 +6,94 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/09 12:19:50 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/09 14:16:40 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <fcntl.h> // library for the O_RDONLY open's flg
+#include <stdio.h>
+#include "get_next_line_utils.c"
+
 
 // This fucntion will take a chunk until it meets a \n 
-char 	*big_chunk(int fd)
+char 	*big_chunk(int fd, char *stash)
 {
 	char *original_buffer;
-	char *temp;
+	// char *temp;
 	int return_value_read;
+
+	// temp == NULL;
 	// ! mallocing the real size
-	original_buffer = (char *)ft_calloc(BUFFER_SIZE + 1* sizeof(char)); // ? taille correcte
+	original_buffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char)); // ? taille correcte
 	// original_buffer = (char *)ft_calloc(BUFFER_SIZE* sizeof(char));
 	if (!original_buffer)
 		return (NULL);
 	// ! Etape 1 : prendre du fd tant qu'il n'y a pas de \n
 	return_value_read = read(fd, original_buffer, BUFFER_SIZE);
-	while (return_value_read > 0 && ft_strchr(temp, '\n') == NULL)
+	while (return_value_read > 0 && ft_strchr(stash, '\n') == NULL)
 	{
 		if (return_value_read < 0)
 			return (NULL);
-		temp = ft_strjoin(temp, original_buffer);
+		stash = ft_strjoin(stash, original_buffer);
 		return_value_read = read(fd, original_buffer, BUFFER_SIZE);
 	}
 	// Cas 1 : il n'y a rien dans la stash => simple copie
 	// Cas 2 : il y a deja des trucs, donc il faut join le bordel
 	free(original_buffer);
-	return (temp);
+	return (stash);
 }
 
-char *extract_line(char *stash)
+char *extract_before_n(char *stash)
 {
 	char *temp;
-	char *return_line;
+	char *buffer;
 	int size;
+	
+	size = 0;
 
-	// len_stash = ft_strlen(stash);
-	return_line = ft_strchr(stash, '\n');
-	size = return_line - ft_strlen(stash);
-	temp = (char*)ft_calloc(size, sizeof(char) + 1);
-	while (*stash != '\n')
+	// Calculer l'index jusqu'au \n
+	while (stash[size] != '\n')
 	{
-		
+		size++;
 	}
 	
+	temp = (char*)malloc(size + 1);
+	if (!temp)
+		return (NULL);
+	while (*stash != '\n')
+	{
+		*temp = *stash;
+		temp++;
+		stash++;
+	}
+	temp[size] = '\0';
+	buffer = temp;
+	free(temp);
+	return (buffer);
+}
+
+char *extract_after_n(char *stash)
+{
+	char *temp;
+	char *buffer;
+	int i;
+
+	i = 0;
+	while (stash[i] != '\n')
+		i++;
+	temp = (char *)malloc(ft_strlen(stash) - i);
+	if (!temp)
+		return (NULL);
+	while (stash)
+	{
+		stash[i] = *temp;
+		i++;
+		temp++;
+	}
+	buffer = temp;
+	free(temp);
+	return (buffer);
 }
 
 char	*get_next_line(int fd)
@@ -63,15 +104,37 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	// ! Etape 1 : recupere ce qu'il reste de la stash
-	stash = big_chunk(fd);
+	stash = big_chunk(fd, stash);
 	if (!stash)
 		return (NULL);
-	current_line = extract_line(stash);
-
-
+		
+	current_line = extract_before_n(stash);
+	if (!current_line)
+		return (NULL);
 	
+	stash = extract_after_n(stash);
+	if (!stash)
+		return (NULL);	
 	
 	return (current_line);
+}
+
+int main(void)
+{
+	int fd;
+	char *master_buffer;
+
+	fd = open("text.txt", O_RDONLY); // O_RDONLY read_only option for openning the file.
+
+	while (1)
+	{
+		master_buffer = get_next_line(fd);
+		if (master_buffer == NULL)
+			break;
+		printf("%s", master_buffer);
+		free(master_buffer);
+	}
+	close (fd);
 }
 
 /*
