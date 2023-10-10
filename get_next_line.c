@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/10 11:50:42 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:23:07 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char 	*big_chunk(int fd, char *stash)
 	if (!original_buffer)
 		return (NULL);
 	return_value_read = 2;
-	while (return_value_read > 0 && (ft_strchr(stash, '\n') == NULL) // \0
+	while (return_value_read > 0 && (ft_strchr(stash, '\n') == NULL)) // \0
 	{
 		return_value_read = read(fd, original_buffer, BUFFER_SIZE);
 		if (return_value_read < 0)
@@ -34,7 +34,10 @@ char 	*big_chunk(int fd, char *stash)
 			free(original_buffer);
 			return (NULL);
 		}
-		stash = ft_strjoin(stash, original_buffer);
+		if (!(return_value_read < BUFFER_SIZE)) // ADDED LINE
+		{
+			stash = ft_strjoin(stash, original_buffer);
+		}
 		// return_value_read = read(fd, original_buffer, BUFFER_SIZE);
 	}
 	free(original_buffer);
