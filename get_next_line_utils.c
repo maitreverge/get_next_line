@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/08 11:33:13 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/10 08:11:54 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,18 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*buffer;
 	int		len_s1;
 	int		len_s2;
 	int		total_len;
 
+	if (!s1)
+	{
+		s1 = (char *)malloc(1);
+		// s1[0] = 0;
+	}
 	if (!s1 || !s2)
 		return (NULL);
 	len_s1 = ft_strlen(s1);
@@ -75,23 +80,22 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
-	char			*p_s;
-	unsigned char	uc_c;
+	int	i;
 
-	p_s = ((char *)s);
-	uc_c = ((unsigned char)c);
-	while (*p_s != '\0')
+	i = 0;
+	if (!s)
+		return (0);
+	if (c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
+	while (s[i] != '\0')
 	{
-		if (*p_s == uc_c)
-			return (p_s);
-		p_s++;
+		if (s[i] == (char) c)
+			return ((char *)&s[i]);
+		i++;
 	}
-	if (uc_c == '\0')
-		return (p_s);
-	else
-		return (NULL);
+	return (0);
 }
 /*
 strchr va rechercher dans un buffer s la presence du char c

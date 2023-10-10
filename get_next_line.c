@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/09 14:16:40 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/10 10:02:00 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,23 @@
 char 	*big_chunk(int fd, char *stash)
 {
 	char *original_buffer;
-	// char *temp;
 	int return_value_read;
 
-	// temp == NULL;
-	// ! mallocing the real size
 	original_buffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char)); // ? taille correcte
-	// original_buffer = (char *)ft_calloc(BUFFER_SIZE* sizeof(char));
 	if (!original_buffer)
 		return (NULL);
-	// ! Etape 1 : prendre du fd tant qu'il n'y a pas de \n
-	return_value_read = read(fd, original_buffer, BUFFER_SIZE);
+	return_value_read = 2;
 	while (return_value_read > 0 && ft_strchr(stash, '\n') == NULL)
 	{
-		if (return_value_read < 0)
-			return (NULL);
-		stash = ft_strjoin(stash, original_buffer);
 		return_value_read = read(fd, original_buffer, BUFFER_SIZE);
+		if (return_value_read < 0)
+		{
+			free(original_buffer);
+			return (NULL);
+		}
+		stash = ft_strjoin(stash, original_buffer);
+		// return_value_read = read(fd, original_buffer, BUFFER_SIZE);
 	}
-	// Cas 1 : il n'y a rien dans la stash => simple copie
-	// Cas 2 : il y a deja des trucs, donc il faut join le bordel
 	free(original_buffer);
 	return (stash);
 }
@@ -49,25 +46,25 @@ char *extract_before_n(char *stash)
 	char *temp;
 	char *buffer;
 	int size;
+	int i;
 	
 	size = 0;
+	i = 0;
 
 	// Calculer l'index jusqu'au \n
 	while (stash[size] != '\n')
-	{
 		size++;
-	}
-	
 	temp = (char*)malloc(size + 1);
 	if (!temp)
 		return (NULL);
-	while (*stash != '\n')
+	while (stash[i] != '\n')
 	{
-		*temp = *stash;
-		temp++;
-		stash++;
+		temp[i] = stash[i];
+		// temp++;
+		// stash++;
+		i++;
 	}
-	temp[size] = '\0';
+	temp[size] = '\n';
 	buffer = temp;
 	free(temp);
 	return (buffer);
@@ -75,21 +72,23 @@ char *extract_before_n(char *stash)
 
 char *extract_after_n(char *stash)
 {
-	char *temp;
-	char *buffer;
-	int i;
+	char	*temp;
+	char	*buffer;
+	int		i;
+	int		j;
 
-	i = 0;
+	i = 0; // ! gros doute la dessus
+	j = 0;
 	while (stash[i] != '\n')
 		i++;
-	temp = (char *)malloc(ft_strlen(stash) - i);
+	temp = (char *)ft_calloc((ft_strlen(stash) - i), sizeof(char));
 	if (!temp)
 		return (NULL);
-	while (stash)
+	while (stash[j] != '\0')
 	{
-		stash[i] = *temp;
+		temp[j] = stash[i + 1];
 		i++;
-		temp++;
+		j++;
 	}
 	buffer = temp;
 	free(temp);
@@ -104,6 +103,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	// ! Etape 1 : recupere ce qu'il reste de la stash
+	
 	stash = big_chunk(fd, stash);
 	if (!stash)
 		return (NULL);
