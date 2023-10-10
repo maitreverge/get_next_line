@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/10 08:11:54 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:13:36 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1)
 	{
 		s1 = (char *)malloc(1);
-		// s1[0] = 0;
 	}
 	if (!s1 || !s2)
 		return (NULL);
@@ -45,6 +44,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	ft_memcpy(buffer, s1, len_s1);
 	ft_memcpy(&buffer[len_s1], s2, len_s2);
 	buffer[len_s1 + len_s2] = '\0';
+	free(s1);
 	return (buffer);
 }
 

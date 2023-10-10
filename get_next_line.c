@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/10 13:55:58 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/10 16:21:37 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char 	*big_chunk(int fd, char *stash)
 	original_buffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char)); // ? taille correcte
 	if (!original_buffer)
 		return (NULL);
-	return_value_read = 2;
+	return_value_read = 1;
 	while (return_value_read > 0 && (ft_strchr(stash, '\n') == NULL)) // \0
 	{
 		return_value_read = read(fd, original_buffer, BUFFER_SIZE);
@@ -68,7 +68,7 @@ char *extract_before_n(char *stash)
 	buffer = malloc(ft_strlen(temp));
 	if (!buffer)
 		return (NULL);
-	buffer = ft_memcpy(buffer, temp, ft_strlen(temp));
+	ft_memcpy(buffer, temp, ft_strlen(temp));
 	free(temp);
 	return (buffer);
 }
@@ -97,7 +97,7 @@ char *extract_after_n(char *stash)
 	buffer = ft_calloc(ft_strlen(temp), sizeof(char));
 	if (!buffer)
 		return (NULL);
-	buffer = ft_memcpy(buffer, temp, ft_strlen(temp));
+	ft_memcpy(buffer, temp, ft_strlen(temp));
 	free(temp);
 	return (buffer);
 }
@@ -139,8 +139,11 @@ int main(void)
 		if (master_buffer == NULL)
 			break;
 		printf("%s", master_buffer);
-		// free(master_buffer);
+		// if(master_buffer)
+		// 	free(master_buffer);
 	}
-	free(master_buffer);
+	if(master_buffer)
+		free(master_buffer);
+	// free(master_buffer);
 	close (fd);
 }
