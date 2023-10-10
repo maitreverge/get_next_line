@@ -6,13 +6,16 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:13 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/10 08:09:37 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:44:51 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+#ifndef BUFFER_SIZE
 # define BUFFER_SIZE 5
+#endif
 
 # include <unistd.h> // read
 # include <stdlib.h> // malloc + free
