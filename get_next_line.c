@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/10 10:02:00 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/10 11:20:03 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char 	*big_chunk(int fd, char *stash)
 char *extract_before_n(char *stash)
 {
 	char *temp;
-	char *buffer;
+	// char *buffer;
 	int size;
 	int i;
 	
@@ -54,26 +54,34 @@ char *extract_before_n(char *stash)
 	// Calculer l'index jusqu'au \n
 	while (stash[size] != '\n')
 		size++;
-	temp = (char*)malloc(size + 1);
+	temp = (char*)malloc(size + 2);
 	if (!temp)
 		return (NULL);
 	while (stash[i] != '\n')
 	{
 		temp[i] = stash[i];
-		// temp++;
-		// stash++;
 		i++;
 	}
 	temp[size] = '\n';
-	buffer = temp;
-	free(temp);
-	return (buffer);
+	temp[size + 1] = '\0';
+
+	
+	// while (temp)
+	// {
+	// 	*buffer = *temp;
+	// 	buffer++;
+	// 	temp++; 
+	// }
+	
+	// buffer = ft_strjoin(temp, buffer);
+	// free(temp);
+	return (temp);
 }
 
 char *extract_after_n(char *stash)
 {
 	char	*temp;
-	char	*buffer;
+	// char	*buffer;
 	int		i;
 	int		j;
 
@@ -84,15 +92,15 @@ char *extract_after_n(char *stash)
 	temp = (char *)ft_calloc((ft_strlen(stash) - i), sizeof(char));
 	if (!temp)
 		return (NULL);
-	while (stash[j] != '\0')
+	while (stash[i] != '\0')
 	{
 		temp[j] = stash[i + 1];
 		i++;
 		j++;
 	}
-	buffer = temp;
-	free(temp);
-	return (buffer);
+	// buffer = ft_strjoin(temp, buffer);
+	// free(temp);
+	return (temp);
 }
 
 char	*get_next_line(int fd)
@@ -132,8 +140,9 @@ int main(void)
 		if (master_buffer == NULL)
 			break;
 		printf("%s", master_buffer);
-		free(master_buffer);
+		// free(master_buffer);
 	}
+	// free(master_buffer);
 	close (fd);
 }
 
