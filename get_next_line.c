@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/10 16:21:37 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/11 13:54:56 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char 	*big_chunk(int fd, char *stash)
 	char *original_buffer;
 	int return_value_read;
 
-	original_buffer = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char)); // ? taille correcte
+	original_buffer = ft_calloc((BUFFER_SIZE ), sizeof(char));
 	if (!original_buffer)
 		return (NULL);
 	return_value_read = 1;
@@ -65,10 +65,10 @@ char *extract_before_n(char *stash)
 	temp[size] = '\n';
 	temp[size + 1] = '\0';
 
-	buffer = malloc(ft_strlen(temp));
+	buffer = malloc(ft_strlen(temp)+1);
 	if (!buffer)
 		return (NULL);
-	ft_memcpy(buffer, temp, ft_strlen(temp));
+	ft_memcpy(buffer, temp, ft_strlen(temp + 1));
 	free(temp);
 	return (buffer);
 }
@@ -76,15 +76,15 @@ char *extract_before_n(char *stash)
 char *extract_after_n(char *stash)
 {
 	char	*temp;
-	char *buffer;
+	char	*buffer;
 	int		i;
 	int		j;
 
-	i = 0; // ! gros doute la dessus
+	i = 0;
 	j = 0;
 	while (stash[i] != '\n')
 		i++;
-	temp = (char *)ft_calloc((ft_strlen(stash) - i) + 1, sizeof(char));
+	temp = ft_calloc(ft_strlen(stash) - i + 1, sizeof(char));
 	if (!temp)
 		return (NULL);
 	while (stash[i] != '\0')
@@ -94,7 +94,7 @@ char *extract_after_n(char *stash)
 		j++;
 	}
 	// temp[j + 1] = '\0'; // ne sert a rien car deja calloc
-	buffer = ft_calloc(ft_strlen(temp), sizeof(char));
+	buffer = ft_calloc(ft_strlen(temp) + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);
 	ft_memcpy(buffer, temp, ft_strlen(temp));
@@ -139,11 +139,11 @@ int main(void)
 		if (master_buffer == NULL)
 			break;
 		printf("%s", master_buffer);
-		// if(master_buffer)
-		// 	free(master_buffer);
+		if(master_buffer)
+			free(master_buffer);
 	}
-	if(master_buffer)
-		free(master_buffer);
+	// if(master_buffer)
+	// 	free(master_buffer);
 	// free(master_buffer);
 	close (fd);
 }

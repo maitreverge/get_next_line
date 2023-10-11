@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/10 16:13:36 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/11 13:46:07 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		total_len;
 
 	if (!s1)
-	{
-		s1 = (char *)malloc(1);
-	}
-	if (!s1 || !s2)
+		s1 = (char *)ft_calloc(1, sizeof(char));
+	if (!s2)
 		return (NULL);
 	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
+	// len_s2 = ft_strlen(s2);
+	len_s2 = BUFFER_SIZE;
 	total_len = len_s1 + len_s2 + 1;
 	buffer = (char *)ft_calloc(total_len, sizeof(char));
 	if (!buffer)
@@ -85,8 +84,8 @@ char	*ft_strchr(char *s, int c)
 	int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
+	if (s == NULL)
+		return (NULL);
 	if (c == '\0')
 		return ((char *)&s[ft_strlen(s)]);
 	while (s[i] != '\0')
@@ -95,7 +94,7 @@ char	*ft_strchr(char *s, int c)
 			return ((char *)&s[i]);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 /*
 strchr va rechercher dans un buffer s la presence du char c
