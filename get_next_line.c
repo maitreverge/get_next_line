@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/11 13:54:56 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:07:13 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,26 @@ char 	*big_chunk(int fd, char *stash)
 	char *original_buffer;
 	int return_value_read;
 
-	original_buffer = ft_calloc((BUFFER_SIZE ), sizeof(char));
+	original_buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!original_buffer)
 		return (NULL);
 	return_value_read = 1;
 	while (return_value_read > 0 && (ft_strchr(stash, '\n') == NULL)) // \0
 	{
+		// check au debut plutot qu'a la fin
+		// pour permettre au buffer de quand meme strjoin
 		return_value_read = read(fd, original_buffer, BUFFER_SIZE);
+		if (return_value_read < BUFFER_SIZE)
+		{
+			stash = ft_strjoin(stash, original_buffer);
+			break ;
+		}
 		if (return_value_read < 0)
 		{
 			free(original_buffer);
 			return (NULL);
 		}
-		if (!(return_value_read < BUFFER_SIZE))
-			stash = ft_strjoin(stash, original_buffer);
+		stash = ft_strjoin(stash, original_buffer);
 	}
 	free(original_buffer);
 	return (stash);
@@ -68,7 +74,8 @@ char *extract_before_n(char *stash)
 	buffer = malloc(ft_strlen(temp)+1);
 	if (!buffer)
 		return (NULL);
-	ft_memcpy(buffer, temp, ft_strlen(temp + 1));
+	// ne pas toucher cette ligne, 
+	ft_memcpy(buffer, temp, ft_strlen(temp));
 	free(temp);
 	return (buffer);
 }

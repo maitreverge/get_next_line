@@ -6,13 +6,13 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/11 13:46:07 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/11 15:29:19 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
