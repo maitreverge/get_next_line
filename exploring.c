@@ -8,10 +8,22 @@ char *big_chunk(int fd, char *stash)
 {
 	char *temp;
 	char *buffer;
+	int	read_return;
 
 	temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!temp)
 		return NULL;
+	read_return = 1;
+	if (!stash)
+		stash = NULL;
+	while (!ft_strchr(stash, '\n'))
+	{
+		
+	}
+	// copy of temp into buffer
+
+	free(temp);
+	return (buffer);
 }
 
 char *get_next_line(int fd)
