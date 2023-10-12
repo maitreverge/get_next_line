@@ -7,23 +7,59 @@
 char *big_chunk(int fd, char *stash)
 {
 	char *temp;
-	char *buffer;
+	// char *buffer;
 	int	read_return;
 
-	temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char)); // Copie avec un \0
+	// buffer = ft_calloc(1, 1);
 	if (!temp)
 		return NULL;
 	read_return = 1;
-	if (!stash)
-		stash = NULL;
-	while (!ft_strchr(stash, '\n'))
+	while (ft_strchr(stash, '\n') == NULL && read_return != 0)
 	{
-		
+		read_return = read(fd, temp, BUFFER_SIZE);
+		if (read_return < 0) // securite de lecture
+			return (NULL);
+		if (read_return != 0) // ecriture dans la stash tant que 
+			stash = ft_strjoin(stash, temp);
 	}
-	// copy of temp into buffer
-
 	free(temp);
-	return (buffer);
+	return (stash);
+}
+
+char *	extract_before_n(char *stash)
+{
+	char *temp;
+	size_t i;
+
+	i = 0;
+	// ! Etape 1 : Prendre l'index jusqu'au \n
+	while (stash[i] != '\n' && stash[i] != '\0') // deuxieme condition pour la derniere ligne sans \n
+		i++;
+	temp = ft_calloc(i + 2); // + 2 pour rajouter un \n et un \0
+	if (!temp)
+		return (NULL);
+	// ! ETAPE 2 : Copier stash dans temp
+	ft_memcpy(temp, stash, i);
+	temp[i] = '\n';
+	// ! Pas besoin de [i + 1] = '\0' car calloc
+	return (temp);
+}
+
+char *extract_after_n(char *stash)
+{
+	int len_stash;
+	int len_until_n;
+	char *temp;
+
+	len_until_n = 0;
+	while (stash[len_until_n] != '\n')
+		len_until_n++;
+	len_stash = ft_strlen(stash);
+	temp = malloc(len_stash - len_until_n);
+	if (!temp)
+		return (NULL);
+
 }
 
 char *get_next_line(int fd)
@@ -36,6 +72,19 @@ char *get_next_line(int fd)
 	
 	// ! ETAPE 1 : Prendre un gros morceau du fd AVEC un \n dedans
 	stash = big_chuck(fd, stash);
+	if (!stash)
+		return (NULL);
+	
+	// ! ETAPE 2 : Decouper stash jusqu'a le \n et le renvoyer dans char *line
+	line = extract_before_n(stash);
+	if (!line)
+		return (NULL);
+
+	// ! Etape 3 : decouper stash apres le \n et le garder pour le prochain rappel de gnl
+	stash = extract_after_n(stash);
+	if (!stash)
+		return (NULL);
+	
 }
 
 int main(void)
