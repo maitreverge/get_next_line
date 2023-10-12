@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/11 16:07:13 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/12 13:49:58 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,19 @@ char 	*big_chunk(int fd, char *stash)
 	return_value_read = 1;
 	while (return_value_read > 0 && (ft_strchr(stash, '\n') == NULL)) // \0
 	{
-		// check au debut plutot qu'a la fin
-		// pour permettre au buffer de quand meme strjoin
 		return_value_read = read(fd, original_buffer, BUFFER_SIZE);
-		if (return_value_read < BUFFER_SIZE)
+		
+		if (return_value_read <= 0)
 		{
-			stash = ft_strjoin(stash, original_buffer);
+			// free(original_buffer);
 			break ;
 		}
-		if (return_value_read < 0)
+		if (return_value_read != 0)
 		{
-			free(original_buffer);
-			return (NULL);
+			stash = ft_strjoin(stash, original_buffer);
+			// break ;
 		}
-		stash = ft_strjoin(stash, original_buffer);
+		// stash = ft_strjoin(stash, original_buffer);
 	}
 	free(original_buffer);
 	return (stash);
@@ -56,10 +55,10 @@ char *extract_before_n(char *stash)
 	size = 0;
 	i = 0;
 	
-	while (stash[size] != '\n')
+	while (stash[size] != '\n' && stash[size] != '\0' )
 		size++;
 		
-	temp = (char*)malloc(size + 2);
+	temp = (char*)malloc(size + 1);
 	if (!temp)
 		return (NULL);
 	
@@ -91,7 +90,7 @@ char *extract_after_n(char *stash)
 	j = 0;
 	while (stash[i] != '\n')
 		i++;
-	temp = ft_calloc(ft_strlen(stash) - i + 1, sizeof(char));
+	temp = ft_calloc(ft_strlen(stash) - i + 1, sizeof(char)); // modified line
 	if (!temp)
 		return (NULL);
 	while (stash[i] != '\0')
@@ -100,8 +99,7 @@ char *extract_after_n(char *stash)
 		i++;
 		j++;
 	}
-	// temp[j + 1] = '\0'; // ne sert a rien car deja calloc
-	buffer = ft_calloc(ft_strlen(temp) + 1, sizeof(char));
+	buffer = ft_calloc(ft_strlen(temp), sizeof(char));
 	if (!buffer)
 		return (NULL);
 	ft_memcpy(buffer, temp, ft_strlen(temp));
@@ -123,12 +121,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 		
 	current_line = extract_before_n(stash);
-	if (!current_line)
-		return (NULL);
+	// if (!current_line)
+	// 	return (NULL);
 	
 	stash = extract_after_n(stash);
-	if (!stash)
-		return (NULL);	
+	// if (!stash)
+	// 	return (NULL);	
 	
 	return (current_line);
 }
@@ -146,11 +144,7 @@ int main(void)
 		if (master_buffer == NULL)
 			break;
 		printf("%s", master_buffer);
-		if(master_buffer)
-			free(master_buffer);
 	}
-	// if(master_buffer)
-	// 	free(master_buffer);
-	// free(master_buffer);
+	free(master_buffer);
 	close (fd);
 }
