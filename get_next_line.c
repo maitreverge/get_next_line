@@ -6,15 +6,11 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/12 13:49:58 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/12 13:56:00 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h> // library for the O_RDONLY open's flg
-#include <stdio.h>
-#include "get_next_line_utils.c"
-
 
 char 	*big_chunk(int fd, char *stash)
 {
@@ -30,16 +26,9 @@ char 	*big_chunk(int fd, char *stash)
 		return_value_read = read(fd, original_buffer, BUFFER_SIZE);
 		
 		if (return_value_read <= 0)
-		{
-			// free(original_buffer);
 			break ;
-		}
 		if (return_value_read != 0)
-		{
 			stash = ft_strjoin(stash, original_buffer);
-			// break ;
-		}
-		// stash = ft_strjoin(stash, original_buffer);
 	}
 	free(original_buffer);
 	return (stash);
@@ -54,14 +43,11 @@ char *extract_before_n(char *stash)
 	
 	size = 0;
 	i = 0;
-	
 	while (stash[size] != '\n' && stash[size] != '\0' )
 		size++;
-		
 	temp = (char*)malloc(size + 1);
 	if (!temp)
 		return (NULL);
-	
 	while (stash[i] != '\n')
 	{
 		temp[i] = stash[i];
@@ -69,11 +55,9 @@ char *extract_before_n(char *stash)
 	}
 	temp[size] = '\n';
 	temp[size + 1] = '\0';
-
 	buffer = malloc(ft_strlen(temp)+1);
 	if (!buffer)
 		return (NULL);
-	// ne pas toucher cette ligne, 
 	ft_memcpy(buffer, temp, ft_strlen(temp));
 	free(temp);
 	return (buffer);
@@ -114,37 +98,28 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	// ! Etape 1 : recupere ce qu'il reste de la stash
-	
 	stash = big_chunk(fd, stash);
 	if (!stash)
 		return (NULL);
-		
 	current_line = extract_before_n(stash);
-	// if (!current_line)
-	// 	return (NULL);
-	
 	stash = extract_after_n(stash);
-	// if (!stash)
-	// 	return (NULL);	
-	
 	return (current_line);
 }
 
-int main(void)
-{
-	int fd;
-	char *master_buffer;
+// int main(void)
+// {
+// 	int fd;
+// 	char *master_buffer;
 
-	fd = open("text.txt", O_RDONLY); // O_RDONLY read_only option for openning the file.
+// 	fd = open("text.txt", O_RDONLY);
 
-	while (1)
-	{
-		master_buffer = get_next_line(fd);
-		if (master_buffer == NULL)
-			break;
-		printf("%s", master_buffer);
-	}
-	free(master_buffer);
-	close (fd);
-}
+// 	while (1)
+// 	{
+// 		master_buffer = get_next_line(fd);
+// 		if (master_buffer == NULL)
+// 			break;
+// 		printf("%s", master_buffer);
+// 	}
+// 	free(master_buffer);
+// 	close (fd);
+// }

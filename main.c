@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:22:36 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/07 16:22:33 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/12 13:53:59 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(void)
 	int fd;
 	char *master_buffer;
 
-	fd = open("text.txt", O_RDONLY); // O_RDONLY read_only option for openning the file.
+	fd = open("text.txt", O_RDONLY);
 
 	while (1)
 	{
@@ -27,8 +27,8 @@ int main(void)
 		if (master_buffer == NULL)
 			break;
 		printf("%s", master_buffer);
-		free(master_buffer);
 	}
+	free(master_buffer);
 	close (fd);
 }
 
