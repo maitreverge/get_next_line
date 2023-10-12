@@ -59,7 +59,8 @@ char *extract_after_n(char *stash)
 	temp = malloc(len_stash - len_until_n);
 	if (!temp)
 		return (NULL);
-
+	ft_memcpy(temp, &stash[len_until_n], len_stash - len_until_n);
+	return (temp);
 }
 
 char *get_next_line(int fd)
@@ -84,7 +85,10 @@ char *get_next_line(int fd)
 	stash = extract_after_n(stash);
 	if (!stash)
 		return (NULL);
+
 	
+	// ! RETURN VALUE
+	return (line);
 }
 
 int main(void)
