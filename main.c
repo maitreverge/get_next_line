@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:22:36 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/12 13:53:59 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/12 13:58:24 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,3 @@ int main(void)
 	free(master_buffer);
 	close (fd);
 }
-
-/*
-	How C open() works in OS
-Find the existing file on the disk.
-Create file table entry.
-Set the first unused file descriptor to point to the file table entry.
-Return file descriptor used, -1 upon failure.
-
-*/
