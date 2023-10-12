@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nope <nope@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/12 15:11:39 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/12 19:28:11 by nope             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		total_len;
 
 	if (!s1)
-		s1 = ft_strdup(s1);
-	if (!s2)
+	{
+		s1 = malloc(1);
+		s1[0] = '\0';
+	if (!s1 || !s2)
 		return (NULL);
 	len_s1 = ft_strlen(s1);
-	len_s2 = BUFFER_SIZE;
+	len_s2 = ft_strlen(s2);
 	total_len = len_s1 + len_s2 + 1;
 	buffer = (char *)malloc(total_len);
 	if (!buffer)
@@ -97,27 +99,3 @@ char	*ft_strchr(char *s, int c)
 	}
 	return (NULL);
 }
-
-char	*ft_strdup(char *s1)
-{
-	char	*buffer;
-	int		len_s1;
-
-	len_s1 = ft_strlen(s1);
-	buffer = (char *)malloc(len_s1 + 1);
-	if (!buffer)
-		return (NULL);
-	ft_memcpy(buffer, s1, len_s1);
-	buffer[len_s1] = '\0';
-	free(s1);
-	return (buffer);
-}
-/*
-strchr va rechercher dans un buffer s la presence du char c
-(qui est en realite un int pour des soucis de
-compatibilite)
-
-If the character c is found in the string s, the function returns a pointer to the first occurrence of c in s.
-If the character c is not found in the string s, the function returns NULL.
-
-*/
