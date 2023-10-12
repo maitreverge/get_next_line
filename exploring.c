@@ -7,19 +7,20 @@
 char *big_chunk(int fd, char *stash)
 {
 	char *temp;
-	// char *buffer;
 	int	read_return;
 
 	temp = ft_calloc(BUFFER_SIZE + 1, sizeof(char)); // Copie avec un \0
-	// buffer = ft_calloc(1, 1);
 	if (!temp)
-		return NULL;
+		return 0;
 	read_return = 1;
 	while (ft_strchr(stash, '\n') == NULL && read_return != 0)
 	{
 		read_return = read(fd, temp, BUFFER_SIZE);
-		if (read_return < 0) // securite de lecture
-			return (NULL);
+		if (read_return == 0) // securite de lecture
+		{
+			stash[ft_strlen(stash)] = '\0';
+			break ;
+		}
 		if (read_return != 0) // ecriture dans la stash tant que 
 			stash = ft_strjoin(stash, temp);
 	}
@@ -36,12 +37,13 @@ char *	extract_before_n(char *stash)
 	// ! Etape 1 : Prendre l'index jusqu'au \n
 	while (stash[i] != '\n' && stash[i] != '\0') // deuxieme condition pour la derniere ligne sans \n
 		i++;
-	temp = ft_calloc(i + 2); // + 2 pour rajouter un \n et un \0
+	temp = ft_calloc((i + 2), sizeof(char)); // + 2 pour rajouter un \n et un \0
 	if (!temp)
 		return (NULL);
 	// ! ETAPE 2 : Copier stash dans temp
 	ft_memcpy(temp, stash, i);
-	temp[i] = '\n';
+	// temp[i] = '\n'; // MODIF
+	temp[i] = '\n'; // MODIF
 	// ! Pas besoin de [i + 1] = '\0' car calloc
 	return (temp);
 }
@@ -53,13 +55,21 @@ char *extract_after_n(char *stash)
 	char *temp;
 
 	len_until_n = 0;
-	while (stash[len_until_n] != '\n')
-		len_until_n++;
+	if (ft_strchr(stash, '\n'))
+	{
+		while (stash[len_until_n] != '\n') // LIGNE QUI CASSE LES COUILLES SON ONCLE
+			len_until_n++;
+	}
+	else
+	{
+		while (stash[len_until_n])
+			len_until_n++;		
+	}
 	len_stash = ft_strlen(stash);
 	temp = malloc(len_stash - len_until_n);
 	if (!temp)
 		return (NULL);
-	ft_memcpy(temp, &stash[len_until_n], len_stash - len_until_n);
+	ft_memcpy(temp, &stash[len_until_n + 1], len_stash - len_until_n);
 	return (temp);
 }
 
@@ -67,14 +77,15 @@ char *get_next_line(int fd)
 {
 	char *line;
 	static char *stash;
+	// int return_read;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return NULL;
 	
 	// ! ETAPE 1 : Prendre un gros morceau du fd AVEC un \n dedans
-	stash = big_chuck(fd, stash);
+	stash = big_chunk(fd, stash);
 	if (!stash)
-		return (NULL);
+		return (NULL); // condition qui pete le retour de line a la derniere iteration
 	
 	// ! ETAPE 2 : Decouper stash jusqu'a le \n et le renvoyer dans char *line
 	line = extract_before_n(stash);
@@ -85,7 +96,6 @@ char *get_next_line(int fd)
 	stash = extract_after_n(stash);
 	if (!stash)
 		return (NULL);
-
 	
 	// ! RETURN VALUE
 	return (line);

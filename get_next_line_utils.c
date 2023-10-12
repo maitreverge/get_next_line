@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/12 12:00:13 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/12 12:12:46 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	// len_s2 = ft_strlen(s2);
 	len_s2 = BUFFER_SIZE;
 	total_len = len_s1 + len_s2 + 1;
-	buffer = (char *)malloc(total_len, sizeof(char));
+	buffer = (char *)malloc(total_len);
 	if (!buffer)
 		return (NULL);
 	ft_memcpy(buffer, s1, len_s1);
