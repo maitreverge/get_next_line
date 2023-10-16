@@ -6,32 +6,25 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:13 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/16 14:25:01 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/16 16:21:59 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-// Deifnition du buffer si il n'existe pas
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
+# include <unistd.h>
+# include <stdlib.h>
 
-
-# include <unistd.h> // read
-# include <stdlib.h> // malloc + free
-
-// Function of gnl
 char	*get_next_line(int fd);
-char *big_chunk(int fd, char *stash);
-char *extract_before_n(char *stash);
-char *extract_after_n(char *stash);
+char	*big_chunk(int fd, char *stash);
+char	*extract_before_n(char *stash);
+char	*extract_after_n(char *stash);
 
-
-
-// Functions of utils
 size_t	ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 void	*ft_calloc(size_t count, size_t size);
