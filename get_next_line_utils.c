@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/12 21:48:29 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/16 10:22:39 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	{
 		s1 = malloc(1);
 		s1[0] = '\0';
+	}
 	if (!s1 || !s2)
 		return (NULL);
 	len_s1 = ft_strlen(s1);

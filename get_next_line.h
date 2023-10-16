@@ -6,16 +6,19 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:13 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/12 15:12:00 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/16 11:08:14 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+// Deifnition du buffer si il n'existe pas
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
 #endif
+
+
 
 # include <unistd.h> // read
 # include <stdlib.h> // malloc + free
@@ -30,9 +33,8 @@ char *extract_after_n(char *stash);
 
 // Functions of utils
 size_t	ft_strlen(char *s);
-void	*ft_calloc(size_t count, size_t size);
 char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strdup(char *s1);
+void	*ft_calloc(size_t count, size_t size);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strchr(char *s, int c);
 
