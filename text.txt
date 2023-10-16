@@ -1,9 +1,0 @@
-Ceci est le test
-1
-pour le file descriptor
-2
-du projet de get_next_line
-3
-zeubi
-4
-END
