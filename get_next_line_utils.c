@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:22 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/16 10:22:39 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/16 14:54:55 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1)
 	{
-		s1 = malloc(1);
+		s1 = malloc(1 * sizeof(char));
 		s1[0] = '\0';
 	}
 	if (!s1 || !s2)
@@ -41,10 +41,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
 	total_len = len_s1 + len_s2 + 1;
-	buffer = (char *)malloc(total_len);
+	buffer = malloc(total_len);
 	if (!buffer)
 		return (NULL);
-	ft_memcpy(buffer, s1, len_s1);
+	if (s1)
+		ft_memcpy(buffer, s1, len_s1);
 	ft_memcpy(&buffer[len_s1], s2, len_s2);
 	buffer[len_s1 + len_s2] = '\0';
 	free(s1);
@@ -68,7 +69,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (buffer);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memcpy(void *dst, void *src, size_t n)
 {
 	size_t	i;
 
@@ -88,7 +89,7 @@ char	*ft_strchr(char *s, int c)
 	int	i;
 
 	i = 0;
-	if (s == NULL)
+	if (!s)
 		return (NULL);
 	if (c == '\0')
 		return ((char *)&s[ft_strlen(s)]);

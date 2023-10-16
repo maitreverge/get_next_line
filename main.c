@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:22:36 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/12 13:58:24 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/16 14:22:31 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int main(void)
 		if (master_buffer == NULL)
 			break;
 		printf("%s", master_buffer);
+		free(master_buffer);
 	}
-	free(master_buffer);
+	if (master_buffer)
+		free(master_buffer);
 	close (fd);
 }
