@@ -6,19 +6,20 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:13 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/16 16:21:59 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/16 17:10:02 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include <unistd.h>
+# include <stdlib.h>
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
-# include <unistd.h>
-# include <stdlib.h>
 
 char	*get_next_line(int fd);
 char	*big_chunk(int fd, char *stash);

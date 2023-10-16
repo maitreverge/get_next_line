@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/16 16:18:41 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/16 17:12:54 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,11 @@ char	*extract_after_n(char *stash)
 	j = 0;
 	i++;
 	while (stash[i] != '\0')
-		temp[j++] = stash[i++];
+	{
+		temp[j] = stash[i];
+		i++;
+		j++;
+	}
 	temp[j] = '\0';
 	free(stash);
 	return (temp);
