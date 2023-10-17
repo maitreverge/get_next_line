@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:22:36 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/17 12:33:20 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/17 12:46:05 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ int main(void)
 	displayTestSeparator("TEST BUFF_SIZE = 100.000", 33);
 	bn();
 	heading(1);
-	printf("\n\n\n\n\n\n\n\n\n\n\n\n");
+	
+	printf("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis aliquam malesuada bibendum arcu vitae. Semper auctor neque vitae tempus quam pellentesque nec nam. Enim eu turpis egestas pretium aenean. Ac turpis egestas integer eget. Adipiscing elit pellentesque habitant morbi tristique senectus et. Sapien faucibus et molestie ac feugiat sed lectus. Molestie a iaculis at erat pellentesque. Amet facilisis magna etiam tempor orci eu. Viverra tellus in hac habitasse platea dictumst vestibulum rhoncus. Sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra. Nullam vehicula ipsum a arcu cursus vitae congue mauris rhoncus. Sit amet dictum sit amet./n/n");
+	printf("Viverra aliquet eget sit amet tellus cras adipiscing. Lacinia at quis risus sed vulputate. Malesuada fames ac turpis egestas sed. Tincidunt lobortis feugiat vivamus at augue eget. Ipsum faucibus vitae aliquet nec ullamcorper sit. Eget egestas purus viverra accumsan in nisl. Convallis a cras semper auctor neque vitae tempus. Quis vel eros donec ac odio tempor. Amet mauris commodo quis imperdiet. Vitae semper quis lectus nulla at volutpat diam ut. Vitae justo eget magna fermentum iaculis eu non.\n\n");
+	printf("Adipiscing at in tellus integer feugiat. Praesent elementum facilisis leo vel fringilla est. Ultricies integer quis auctor elit sed vulputate. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo. Viverra accumsan in nisl nisi. Habitant morbi tristique senectus et netus et malesuada fames. Consectetur purus ut faucibus pulvinar elementum integer enim. Turpis massa sed elementum tempus egestas sed sed. Sem viverra aliquet eget sit amet tellus. Dictum sit amet justo donec. Quis hendrerit dolor magna eget est lorem ipsum. Eu facilisis sed odio morbi quis commodo odio aenean sed.");
+	
 
 	int fd;
 	char *master_buffer;
