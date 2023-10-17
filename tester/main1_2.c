@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main1_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:22:36 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/16 17:14:32 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/17 12:11:55 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../get_next_line.h"
 #include <fcntl.h> // library for the O_RDONLY oepn's flg
 #include <stdio.h>
 #include <string.h>
@@ -47,16 +47,16 @@ void	heading(int i)
 
 int main(void)
 {
-	// displayTestSeparator("TEST_1", 31);
-	// bn();
-	// heading(1);
-	// printf("1\n2\n3\n4\n5\n6\n7\n8\n9\n");
+	displayTestSeparator("TEST BUF SIZE = -42", 31);
+	bn();
+	heading(1);
+	printf("");
 
 	int fd;
 	char *master_buffer;
-	fd = open("test_1.txt", O_RDONLY);
+	fd = open("file_tests/test_1.txt", O_RDONLY);
 	
-	// heading(2);
+	heading(2);
 	while (1)
 	{
 		master_buffer = get_next_line(fd);
