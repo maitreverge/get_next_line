@@ -152,4 +152,160 @@ cc -Wall -Wextra -Werror -g main4_6.c ../get_next_line.c ../get_next_line_utils.
 sleep 1
 
 
+#################################################### test5
 
+rm test1
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=0 main5_1.c ../get_next_line.c ../get_next_line_utils.c -o test1 && valgrind ./test1
+
+sleep 1
+
+#################
+rm test2
+
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=-42 main5_2.c ../get_next_line.c ../get_next_line_utils.c -o test2 && valgrind ./test2
+
+sleep 1
+
+#################
+rm test3
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=1 main5_3.c ../get_next_line.c ../get_next_line_utils.c -o test3 && valgrind ./test3
+
+sleep 1
+
+#################
+rm test4
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=42 main5_4.c ../get_next_line.c ../get_next_line_utils.c -o test4 && valgrind ./test4
+
+sleep 1
+
+#################
+rm test5
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=100000 main5_5.c ../get_next_line.c ../get_next_line_utils.c -o test5 && valgrind ./test5
+
+sleep 1
+
+#################
+rm test6
+
+cc -Wall -Wextra -Werror -g main5_6.c ../get_next_line.c ../get_next_line_utils.c -o test6 && valgrind ./test6
+
+sleep 1
+
+#################################################### test6
+
+rm test1
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=0 main6_1.c ../get_next_line.c ../get_next_line_utils.c -o test1 && valgrind ./test1
+
+sleep 1
+
+#################
+rm test2
+
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=-42 main6_2.c ../get_next_line.c ../get_next_line_utils.c -o test2 && valgrind ./test2
+
+sleep 1
+
+#################
+rm test3
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=1 main6_3.c ../get_next_line.c ../get_next_line_utils.c -o test3 && valgrind ./test3
+
+sleep 1
+
+#################
+rm test4
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=42 main6_4.c ../get_next_line.c ../get_next_line_utils.c -o test4 && valgrind ./test4
+
+sleep 1
+
+#################
+rm test5
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=100000 main6_5.c ../get_next_line.c ../get_next_line_utils.c -o test5 && valgrind ./test5
+
+sleep 1
+
+#################
+rm test6
+
+cc -Wall -Wextra -Werror -g main6_6.c ../get_next_line.c ../get_next_line_utils.c -o test6 && valgrind ./test6
+
+sleep 1
+
+#################################################### test7
+
+rm test1
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=0 main7_1.c ../get_next_line.c ../get_next_line_utils.c -o test1 && valgrind ./test1
+
+sleep 1
+
+#################
+rm test2
+
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=-42 main7_2.c ../get_next_line.c ../get_next_line_utils.c -o test2 && valgrind ./test2
+
+sleep 1
+
+#################
+rm test3
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=1 main7_3.c ../get_next_line.c ../get_next_line_utils.c -o test3 && valgrind ./test3
+
+sleep 1
+
+#################
+rm test4
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=42 main7_4.c ../get_next_line.c ../get_next_line_utils.c -o test4 && valgrind ./test4
+
+sleep 1
+
+#################
+rm test5
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=100000 main7_5.c ../get_next_line.c ../get_next_line_utils.c -o test5 && valgrind ./test5
+
+sleep 1
+
+#################
+rm test6
+
+cc -Wall -Wextra -Werror -g main7_6.c ../get_next_line.c ../get_next_line_utils.c -o test6 && valgrind ./test6
+
+sleep 1
+
+#################################################### test8
+
+rm test1
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=0 main8_1.c ../get_next_line.c ../get_next_line_utils.c -o test1 && valgrind ./test1
+
+sleep 1
+
+#################
+rm test2
+
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=-42 main8_2.c ../get_next_line.c ../get_next_line_utils.c -o test2 && valgrind ./test2
+
+sleep 1
+
+#################
+rm test3
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=1 main8_3.c ../get_next_line.c ../get_next_line_utils.c -o test3 && valgrind ./test3
+
+sleep 1
+
+#################
+rm test4
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=42 main8_4.c ../get_next_line.c ../get_next_line_utils.c -o test4 && valgrind ./test4
+
+sleep 1
+
+#################
+rm test5
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=100000 main8_5.c ../get_next_line.c ../get_next_line_utils.c -o test5 && valgrind ./test5
+
+sleep 1
+
+#################
+rm test6
+
+cc -Wall -Wextra -Werror -g main8_6.c ../get_next_line.c ../get_next_line_utils.c -o test6 && valgrind ./test6
+
+sleep 1
+
+########################### 		END SCRIPT		#################################################
