@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:22:36 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/17 13:12:50 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/17 13:21:37 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int main(void)
 	displayTestSeparator("TEST BUFF_SIZE = 100.000", 91);
 	bn();
 	heading(1);
-	printf("\t1\t\t2\t\t\t3\t\t\t\t4\t\t\t\t\t5\t\t\t\t\t\t6\t\t\t\t\t\t\t7\t\t\t\t\t\t\t\t8\t\t\t\t\t\t\t\t\t9")
+	printf("\t1\n\t\t2\n\t\t\t3\n\t\t\t\t4\n\t\t\t\t\t5\n\t\t\t\t\t\t6\n\t\t\t\t\t\t\t7\n\t\t\t\t\t\t\t\t8\n\t\t\t\t\t\t\t\t\t9");
+
 
 	int fd;
 	char *master_buffer;
