@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 10:25:13 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/16 17:10:02 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/17 15:25:01 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
-
 
 char	*get_next_line(int fd);
 char	*big_chunk(int fd, char *stash);

@@ -6,7 +6,7 @@
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:27:58 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/17 15:21:23 by flverge          ###   ########.fr       */
+/*   Updated: 2023/10/17 15:23:18 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ char	*extract_after_n(char *stash)
 		free(stash);
 		return (NULL);
 	}
-	// ligne qui pose probleme
 	temp = (char *)malloc((ft_strlen(stash) - i + 1) * sizeof(char));
 	if (!temp)
 		return (NULL);
