@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flverge <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 10:24:42 by flverge           #+#    #+#             */
-/*   Updated: 2023/10/17 15:20:43 by flverge          ###   ########.fr       */
+/*   Created: 2023/10/17 14:27:58 by flverge           #+#    #+#             */
+/*   Updated: 2023/10/17 15:21:23 by flverge          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*big_chunk(int fd, char *stash)
 {
@@ -78,6 +78,7 @@ char	*extract_after_n(char *stash)
 		free(stash);
 		return (NULL);
 	}
+	// ligne qui pose probleme
 	temp = (char *)malloc((ft_strlen(stash) - i + 1) * sizeof(char));
 	if (!temp)
 		return (NULL);
@@ -93,14 +94,14 @@ char	*extract_after_n(char *stash)
 char	*get_next_line(int fd)
 {
 	char		*current_line;
-	static char	*stash;
+	static char	*stash[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stash = big_chunk(fd, stash);
-	if (!stash)
+	stash[fd] = big_chunk(fd, stash[fd]);
+	if (!stash[fd])
 		return (NULL);
-	current_line = extract_before_n(stash);
-	stash = extract_after_n(stash);
+	current_line = extract_before_n(stash[fd]);
+	stash[fd] = extract_after_n(stash[fd]);
 	return (current_line);
 }
