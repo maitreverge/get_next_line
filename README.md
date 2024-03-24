@@ -77,4 +77,4 @@ You should now see on your terminal the actual `lorem_ipsum` file read by get_ne
 
 
 ## 🤝 CONTRIBUTION
-Contributions are open, make a pull request or open an issue 
+Contributions are open, make a pull request or open an issue 🚀
