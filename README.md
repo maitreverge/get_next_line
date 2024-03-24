@@ -23,7 +23,7 @@ soon
 Run in your shell environment :
 
 ```bash
-git clone https://github.com/maitreverge/get_next_line.git libft && cd get_next_line
+git clone https://github.com/maitreverge/get_next_line.git get_next_line && cd get_next_line
 ```
 
 ### Step 2 :
