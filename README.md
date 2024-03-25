@@ -41,26 +41,34 @@ touch lorem_ipsum && chmod 666 lorem_ipsum && echo  "Lorem ipsum dolor sit amet,
 #include <string.h>
 #include <fcntl.h>
 
-char *get_next_line(int fd);
-
 int main(void)
 {
-  // opens up a file descriptor from which get_next_line will access and read the file.
+  // opens up a file descriptor from which get_next_line will access and read the file
   int fd = open("lorem_ipsum", O_RDONLY);
+
   // The buffer in which we'll store the current line
   char *master_buffer;
 
   while (1)
   {
+    // Actual reading from get_next_line
     master_buffer = get_next_line(fd);
+
+   // When get_next_line returns NULL, it means we reached the EOF
     if (master_buffer == NULL)
 	    break;
-    printf("%s", master_buffer); // prints the current line from `fd`.
-    free(master_buffer);
+
+    // prints the current line from `fd`
+    printf("%s", master_buffer);
+
+    free(master_buffer); // Even though you have 512TB of RAM
   }
+
+    // Security check
   if (master_buffer)
 	  free(master_buffer);
-  // don't forget to close the opened fd from `read` function.
+
+  // don't forget to close the opened fd from `read` function
   close (fd);
 }
 
