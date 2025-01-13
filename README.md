@@ -82,7 +82,5 @@ gcc -Wall -Wextra -Werror main.c get_next_line.c get_next_line_utils.c -o gnl &&
 
 You should now see on your terminal the actual `lorem_ipsum` file read by get_next_line.
 
-
-
 ## 🤝 CONTRIBUTION
-Contributions are open, make a pull request or open an issue 🚀
+Contributions are open, open a Github Issue or submit a PR 🚀
